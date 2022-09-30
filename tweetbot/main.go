@@ -7,15 +7,15 @@ import (
 )
 
 func GetTwitterApi() *anaconda.TwitterApi {
-    anaconda.SetConsumerKey("API Key")
-    anaconda.SetConsumerSecret("API Secret")
-    api := anaconda.NewTwitterApi("Access Token", "Access Token Secret")
+    anaconda.SetConsumerKey("VBrgNdckhllQGHSu3WRbxbKKs")
+    anaconda.SetConsumerSecret("6NWSu5EHLvAuNfNwx3BrMZTMWzYrJNAoQKXmuhd13OkRKLgCX0")
+    api := anaconda.NewTwitterApi("1575768596911120384-kUCnjm42wZbH2dSDbZgBpPomr9OurF", "BJyC5pbsYmzvCN7RLdcNZ0g3t38PelDGpKP4mb4PLkrwr")
     return api
 }
 
 func main(){
     api := GetTwitterApi()
-    text := "失せろ"
+    text := "https://twitter.com/ApiGolang"
 
     tweet, err := api.PostTweet(text, nil)
     if err != nil {

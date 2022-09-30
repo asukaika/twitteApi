@@ -1,50 +1,25 @@
 package main
 
 import (
-"fmt"
-"time"
-. "fmt"
-. "./keys"
-. "github.com/***/twitterApi/tweetbot/text" //text.goをgithubにあげて、go getをした
+	"fmt"
+
+	"github.com/ChimeraCoder/anaconda"
 )
 
-func main() {
-    chStop := make(chan int, 1)
-    TimerFunc(chStop)
-
-    time.Sleep(time.Hour * 24 * 365)
-    chStop <- 0 // Tickerをstopさせるメッセージ
-
-    close(chStop)
-
-    time.Sleep(time.Second * 1)
-
-    fmt.Println("Application End.")
+func GetTwitterApi() *anaconda.TwitterApi {
+    anaconda.SetConsumerKey("API Key")
+    anaconda.SetConsumerSecret("API Secret")
+    api := anaconda.NewTwitterApi("Access Token", "Access Token Secret")
+    return api
 }
 
-func TimerFunc(stopTimer chan int) {
-    go func() {
-        ticker := time.NewTicker(24 * time.Hour) // 1日間隔のTicker
+func main(){
+    api := GetTwitterApi()
+    text := "失せろ"
 
-    LOOP:
-        for {
-            select {
-            case <-ticker.C:
-                api := GetTwitterApi()
-                text := ChooseTweet()
-
-                tweet, err := api.PostTweet(text, nil)
-                if err != nil {
-                    panic(err)
-                }
-                Print(tweet.Text)
-                //}
-            case <-stopTimer:
-                fmt.Println("Timer stop.")
-                ticker.Stop()
-                break LOOP
-            }
+    tweet, err := api.PostTweet(text, nil)
+    if err != nil {
+        panic(err)
         }
-        fmt.Println("timerfunc end.")
-    }()
+    fmt.Print(tweet.Text)
 }

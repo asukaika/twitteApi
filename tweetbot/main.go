@@ -1,12 +1,11 @@
 package main
 
 import (
-	"fmt"
-	. "fmt"
-	"time"
-
-	. "./keys"
-	. "github.com/asukaika/tweetbot/text" //text.goをgithubにあげて、go getをした
+"fmt"
+"time"
+. "fmt"
+. "./keys"
+. "github.com/***/twitterApi/tweetbot/text" //text.goをgithubにあげて、go getをした
 )
 
 func main() {
